@@ -9,7 +9,7 @@ You can [try the plugin](http://cscan.gprod.net) and see if it works with your c
 
 A handheld scanner is exactly like a keyboard that will quickly enter the sequence of any scanned code.  
 The trick is rely on the speed of entry to suspect a scan.  
-More detail on the previously mentionned blog.
+More detail on the previously mentioned blog.
 
 ## Installation
 
@@ -44,10 +44,14 @@ Minimum characters entered to be considered as a code reader
 * `maxEntryTime` _default: 100_  
 Maximum time (in millisecond) to enter the characters to be considered as a code reader
 
+* `ignoreKeyCodeList` _default: [13]_  
+Array of keycodes to ignore in the input, defaults to _enter_
+
 ```javascript
 $('#code-scan').codeScanner({
-    maxEntryTime: 500, // milliseconds
-    minEntryChars: 15  // characters
+    maxEntryTime: 500,          // milliseconds
+    minEntryChars: 15,          // characters
+    ignoreKeyCodeList: [8, 13]  // JavaScript keycodes
 });
 ```
 

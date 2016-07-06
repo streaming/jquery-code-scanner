@@ -9,13 +9,14 @@
 
             $(window).keypress(function (e) {
                 var keycode = (e.which) ? e.which : e.keyCode;
-                if ((keycode >= 65 && keycode <= 90) ||
+                if (((keycode >= 65 && keycode <= 90) ||
                     (keycode >= 97 && keycode <= 122) ||
-                    (keycode >= 48 && keycode <= 57)
+                    (keycode >= 48 && keycode <= 57)) &&
+                    settings.ignoreKeyCodeList.indexOf(keycode) === -1
                 ) {
                     chars.push(String.fromCharCode(e.which));
                 }
-                // console.log(e.which + ":" + chars.join("|"));
+
                 if (pressed == false) {
                     setTimeout(function () {
                         if (chars.length >= settings.minEntryChars) {
@@ -30,7 +31,7 @@
             });
 
             $(this).keypress(function (e) {
-                if (e.which === 13) {
+                if (settings.ignoreKeyCodeList.indexOf(e.which) > -1) {
                     e.preventDefault();
                 }
             });
@@ -41,7 +42,8 @@
 
     $.fn.codeScanner.defaults = {
         minEntryChars: 8,
-        maxEntryTime: 100,
+        maxEntryTime: 500,
+        ignoreKeyCodeList: [13],
         onScan: function ($element, barcode) {
             $element.val(barcode);
         }
